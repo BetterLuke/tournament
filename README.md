@@ -24,4 +24,4 @@ The tournament_test.py ensures that the rules of the Swiss system work by 'passi
 - Use vagrant up to start the vagrant vm then run the command vagrant ssh to login
 - Create a copy of the tournament folder in the vagrant folder
 - Run psql -f tournament.sql
-- Run python tournament_reults.py
+- Run python tournament_test.py
