@@ -1,4 +1,4 @@
-# tournament
+# Tournament database
 
 Tournament Results Database
 
