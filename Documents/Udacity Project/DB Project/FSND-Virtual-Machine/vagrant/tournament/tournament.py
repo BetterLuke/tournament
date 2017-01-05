@@ -137,9 +137,10 @@ def reportMatch(winner, loser):
     conn.commit()
     #close the connection
     conn.close()
-
-def breakIntoGroups(list, size = 2):
-    size = max(1, size)
+    """
+        returns a list of two players for a match
+    """
+def pairings(list, size = 2):
     return [list[i:i + size] for i in range(0, len(list), size)]
 
 def swissPairings():
@@ -158,10 +159,10 @@ def swissPairings():
         name2: the second player's name
     """
     standings = playerStandings()
-    grouped_pool = breakIntoGroups(standings, 2)
+    paired_pool = pairings(standings, 2)
     matched_pairs = list()
 
-    for paired in grouped_pool:
+    for paired in paired_pool:
         pairing = list()
         for player in paired:
             pairing.append(player[0])
