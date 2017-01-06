@@ -123,7 +123,7 @@ def reportMatch(winner, loser):
     Args:
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
-      insert into matches VALUES ('%s', '%s') (winner, loser)
+      insert into matches VALUES (%s, %s) (winner, loser)
     """
     conn = connect()
     #cursor
