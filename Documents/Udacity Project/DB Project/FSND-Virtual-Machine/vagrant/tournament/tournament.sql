@@ -12,6 +12,9 @@ drop database tournament;
 
 create database tournament;
 
+-- connect to the database
+\c tournament
+
 -- players database
 create table players (
   id SERIAL primary key,
@@ -44,3 +47,12 @@ CREATE VIEW v_matches AS
   FROM players left join matches
   ON(players.id = matches.winner) OR(players.id= matches.loser)
   GROUP BY players.id;
+
+  -- view for player standings
+  CREATE VIEW v_standings AS
+    SELECT players.id, players.name, v_wins.wins, v_matches.matches
+    from players
+    LEFT JOIN v_wins on players.id = v_wins.player
+    LEFT JOIN v_matches on players.id = v_matches.player
+    GROUP BY players.id, players.name, v_wins.wins, v_matches.matches
+    ORDER BY v_wins.wins DESC;

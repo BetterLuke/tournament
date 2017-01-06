@@ -78,9 +78,11 @@ def registerPlayer(name):
     # cursor to execute statement
     db_cursor = conn.cursor()
     # query statement
-    query = "INSERT INTO players(name) VALUES('%s');" % name
+    query = "INSERT INTO players(name) VALUES(%s);"
+    #make name a tuple to be used in the execute method
+    argument = tuple([name])
     # execute the commands
-    db_cursor.execute(query)
+    db_cursor.execute(query, argument)
     # commit to the database
     conn.commit()
     # cloes the connection
@@ -105,12 +107,7 @@ def playerStandings():
     db_cursor = conn.cursor()
     # query statement
     query = """
-                SELECT players.id, players.name, v_wins.wins, v_matches.matches
-                from players
-                LEFT JOIN v_wins on players.id = v_wins.player
-                LEFT JOIN v_matches on players.id = v_matches.player
-                GROUP BY players.id, players.name, v_wins.wins, v_matches.matches
-                ORDER BY v_wins.wins DESC;
+                SELECT * from v_standings;
                 """
     # execute the commands
     db_cursor.execute(query)
@@ -161,6 +158,7 @@ def swissPairings():
     standings = playerStandings()
     paired_pool = pairings(standings, 2)
     matched_pairs = list()
+
 
     for paired in paired_pool:
         pairing = list()
